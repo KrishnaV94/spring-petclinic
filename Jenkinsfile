@@ -1,6 +1,5 @@
 pipeline {
     agent { label ('JDK11') }
-    triggers { pollSCM('* * * * *') }
     stages {
         stage ('SourceCodeManagement') {
         steps {
@@ -21,7 +20,7 @@ pipeline {
         }
         stage ('Archive the Artifacts') {
             steps {
-                archiveArtifacts artifacts: '**/*.jar' allowEmptyArchive: true, fingerprint: true, onlyIfSuccessful: true
+                archiveArtifacts artifacts: '**/*.jar', followSymlinks: false
             }
         }
     }
